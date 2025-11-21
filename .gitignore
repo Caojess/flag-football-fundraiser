@@ -21,9 +21,8 @@ dist-ssr
 
 # Large video files (host on CDN instead)
 *.mov
-*.mp4
+ffvid.mov
 src/assets/hero-bg.mov
-src/assets/hero-bg.mp4
 
 # Editor directories and files
 .vscode/*
