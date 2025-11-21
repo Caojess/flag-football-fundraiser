@@ -11,7 +11,7 @@ import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-
 import { loadStripe } from "@stripe/stripe-js";
 import { Loader2 } from "lucide-react";
 
-const stripePromise = loadStripe("pk_test_51QcUJNI2YbnwkB1iC0LyIFj6oRNgUMJKKvGj9R1K1TE53bHqjB9H7vqDUPOSQnmg7gzGqQRO0aZYM4G0qqBGQKKy00sAYwDqVk");
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "pk_test_51QcUJNI2YbnwkB1iC0LyIFj6oRNgUMJKKvGj9R1K1TE53bHqjB9H7vqDUPOSQnmg7gzGqQRO0aZYM4G0qqBGQKKy00sAYwDqVk");
 
 interface DonationModalProps {
   open: boolean;
@@ -177,14 +177,43 @@ export const DonationModal = ({ open, onClose, player }: DonationModalProps) => 
         {!clientSecret ? (
           <div className="space-y-6">
             {player && (
-              <div className="bg-muted/50 rounded-lg p-4 text-center">
+              <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-4 text-center border border-primary/20">
                 <p className="text-sm text-muted-foreground mb-1">Donating to</p>
-                <p className="font-bold text-xl">#{player.number} {player.name}</p>
+                <p className="font-bold text-xl">{player.name}</p>
                 <p className="text-sm text-muted-foreground">{player.position}</p>
               </div>
             )}
 
             <div className="space-y-4">
+              <div>
+                <Label htmlFor="amount" className="text-base font-semibold">Select Amount *</Label>
+                <div className="grid grid-cols-3 gap-2 mt-2 mb-3">
+                  {[10, 25, 50, 100, 250, 500].map((presetAmount) => (
+                    <Button
+                      key={presetAmount}
+                      type="button"
+                      variant={amount === presetAmount.toString() ? "default" : "outline"}
+                      className={`${amount === presetAmount.toString() ? 'bg-primary text-white' : ''}`}
+                      onClick={() => setAmount(presetAmount.toString())}
+                    >
+                      ${presetAmount}
+                    </Button>
+                  ))}
+                </div>
+                <Input
+                  id="amount"
+                  type="number"
+                  min="5"
+                  step="1"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  placeholder="Or enter custom amount"
+                  required
+                  className="text-lg font-semibold"
+                />
+                <p className="text-xs text-muted-foreground mt-1">Minimum donation: $5.00</p>
+              </div>
+
               <div>
                 <Label htmlFor="name">Your Name *</Label>
                 <Input
@@ -206,21 +235,6 @@ export const DonationModal = ({ open, onClose, player }: DonationModalProps) => 
                   placeholder="john@example.com"
                   required
                 />
-              </div>
-
-              <div>
-                <Label htmlFor="amount">Donation Amount (USD) *</Label>
-                <Input
-                  id="amount"
-                  type="number"
-                  min="5"
-                  step="1"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  placeholder="25.00"
-                  required
-                />
-                <p className="text-xs text-muted-foreground mt-1">Minimum donation: $5.00</p>
               </div>
 
               <div>

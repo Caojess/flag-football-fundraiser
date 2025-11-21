@@ -104,7 +104,7 @@ export const RecentDonations = () => {
                   {donation.players ? (
                     <p className="text-sm text-muted-foreground mb-1">
                       donated to <span className="font-semibold text-secondary">
-                        #{donation.players.number} {donation.players.name}
+                        {donation.players.name}
                       </span>
                     </p>
                   ) : (

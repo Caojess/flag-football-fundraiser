@@ -26,6 +26,7 @@ const Index = () => {
   const [donationModalOpen, setDonationModalOpen] = useState(false);
   const [donationTarget, setDonationTarget] = useState<Player | null>(null);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetchPlayers();
@@ -47,7 +48,7 @@ const Index = () => {
       const { data: playersData, error: playersError } = await supabase
         .from("players")
         .select("*")
-        .order("number");
+        .order("name");
 
       if (playersError) throw playersError;
 
@@ -115,6 +116,13 @@ const Index = () => {
     setDonationModalOpen(true);
   };
 
+  // Filter and sort players alphabetically based on search query
+  const filteredPlayers = players
+    .filter((player) =>
+      player.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -154,21 +162,53 @@ const Index = () => {
             <h2 className="text-4xl md:text-5xl font-black text-center mb-4">
               Meet Our Athletes
             </h2>
-            <p className="text-center text-muted-foreground text-lg mb-12 max-w-2xl mx-auto">
+            <p className="text-center text-muted-foreground text-lg mb-6 max-w-2xl mx-auto">
               Click on any player to learn more and support them individually
             </p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
-              {players.map((player) => (
-                <PlayerCard
-                  key={player.id}
-                  player={player}
-                  isSelected={selectedPlayer?.id === player.id}
-                  onClick={() => handlePlayerClick(player)}
-                  onDonate={() => handleDonatePlayer(player)}
+            {/* Search Bar */}
+            <div className="max-w-md mx-auto mb-12">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search players by name..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full px-4 py-3 pl-10 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                 />
-              ))}
+                <svg
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </div>
             </div>
+
+            {filteredPlayers.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground text-lg">
+                  No players found matching "{searchQuery}"
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
+                {filteredPlayers.map((player) => (
+                  <PlayerCard
+                    key={player.id}
+                    player={player}
+                    isSelected={selectedPlayer?.id === player.id}
+                    onClick={() => handlePlayerClick(player)}
+                    onDonate={() => handleDonatePlayer(player)}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </section>
 

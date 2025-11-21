@@ -38,9 +38,11 @@ export const PlayerCard = ({ player, isSelected, onClick, onDonate }: PlayerCard
             <User className="w-20 h-20 text-gray-400" strokeWidth={1.5} />
           </div>
         )}
+        {/* Jersey number - commented out until numbers are available
         <div className="absolute top-2 right-2 bg-primary text-white font-black text-lg w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
           #{player.number}
         </div>
+        */}
       </div>
       
       <div className="p-4">
