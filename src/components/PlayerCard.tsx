@@ -46,7 +46,7 @@ export const PlayerCard = ({ player, isSelected, onClick, onDonate }: PlayerCard
       </div>
       
       <div className="p-4">
-        <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">
+        <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors whitespace-nowrap overflow-hidden text-ellipsis" title={player.name}>
           {player.name}
         </h3>
         <p className="text-muted-foreground text-xs mb-3">{player.position}</p>
