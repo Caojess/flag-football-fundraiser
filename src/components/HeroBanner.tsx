@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBgVideo from "@/assets/hero-bg.mov";
 import teamLogo from "@/assets/team-logo.png";
-import playerPlaceholder from "@/assets/player-placeholder.jpg";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, User } from "lucide-react";
 
 interface HeroBannerProps {
   selectedPlayer: any | null;
@@ -29,13 +28,19 @@ export const HeroBanner = ({
   };
 
   return (
-    <div className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroBg})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/95 via-blue-800/90 to-primary/80" />
+    <div className="relative min-h-[300px] flex items-center justify-center overflow-hidden">
+      {/* Background Video with Overlay */}
+      <div className="absolute inset-0">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src={heroBgVideo} type="video/quicktime" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 via-blue-800/50 to-primary/40" />
       </div>
 
       {/* Content */}
@@ -86,11 +91,17 @@ export const HeroBanner = ({
               Back to Team
             </Button>
 
-            <img 
-              src={selectedPlayer.headshot_url || playerPlaceholder} 
-              alt={selectedPlayer.name} 
-              className="w-48 h-48 rounded-full mx-auto mb-6 border-8 border-white shadow-2xl object-cover"
-            />
+            {selectedPlayer.headshot_url ? (
+              <img 
+                src={selectedPlayer.headshot_url} 
+                alt={selectedPlayer.name} 
+                className="w-48 h-48 rounded-full mx-auto mb-6 border-8 border-white shadow-2xl object-cover"
+              />
+            ) : (
+              <div className="w-48 h-48 rounded-full mx-auto mb-6 border-8 border-white shadow-2xl bg-gray-200 flex items-center justify-center">
+                <User className="w-24 h-24 text-gray-400" strokeWidth={1.5} />
+              </div>
+            )}
             
             <div className="inline-block bg-secondary/20 backdrop-blur-sm px-6 py-2 rounded-full mb-4 border border-secondary/30">
               <span className="text-3xl font-black text-white">#{selectedPlayer.number}</span>

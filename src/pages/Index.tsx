@@ -6,7 +6,6 @@ import { PlayerCard } from "@/components/PlayerCard";
 import { DonationModal } from "@/components/DonationModal";
 import { RecentDonations } from "@/components/RecentDonations";
 import teamLogo from "@/assets/team-logo.png";
-import { Trophy, Users, Target } from "lucide-react";
 
 interface Player {
   id: string;
@@ -149,35 +148,6 @@ const Index = () => {
           onBackToTeam={handleBackToTeam}
         />
 
-        {/* Stats Section */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              <div className="text-center">
-                <div className="bg-primary/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Trophy className="w-10 h-10 text-primary" />
-                </div>
-                <h3 className="text-4xl font-black text-primary mb-2">12</h3>
-                <p className="text-muted-foreground">Star Athletes</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-secondary/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-10 h-10 text-secondary" />
-                </div>
-                <h3 className="text-4xl font-black text-secondary mb-2">{players.length}</h3>
-                <p className="text-muted-foreground">Team Members</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-accent/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Target className="w-10 h-10 text-accent" />
-                </div>
-                <h3 className="text-4xl font-black text-accent mb-2">100%</h3>
-                <p className="text-muted-foreground">Dedication</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Player Roster */}
         <section className="py-20">
           <div className="container mx-auto px-4">
@@ -188,7 +158,7 @@ const Index = () => {
               Click on any player to learn more and support them individually
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
               {players.map((player) => (
                 <PlayerCard
                   key={player.id}
