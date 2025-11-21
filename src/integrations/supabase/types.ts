@@ -14,7 +14,83 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      donations: {
+        Row: {
+          amount: number
+          created_at: string
+          display_publicly: boolean | null
+          donor_email: string
+          donor_name: string
+          id: string
+          message: string | null
+          player_id: string | null
+          stripe_payment_intent_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          display_publicly?: boolean | null
+          donor_email: string
+          donor_name: string
+          id?: string
+          message?: string | null
+          player_id?: string | null
+          stripe_payment_intent_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          display_publicly?: boolean | null
+          donor_email?: string
+          donor_name?: string
+          id?: string
+          message?: string | null
+          player_id?: string | null
+          stripe_payment_intent_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donations_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "players"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      players: {
+        Row: {
+          bio: string | null
+          created_at: string
+          headshot_url: string | null
+          id: string
+          name: string
+          number: number
+          position: string
+          slug: string
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          headshot_url?: string | null
+          id?: string
+          name: string
+          number: number
+          position: string
+          slug: string
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          headshot_url?: string | null
+          id?: string
+          name?: string
+          number?: number
+          position?: string
+          slug?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
