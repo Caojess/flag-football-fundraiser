@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import heroBgVideo from "@/assets/hero-bg.mp4";
+// Video removed from git due to file size - will host on CDN later
+// import heroBgVideo from "@/assets/hero-bg.mp4";
 import teamLogo from "@/assets/team-logo.png";
 import { ArrowLeft, User } from "lucide-react";
 
@@ -29,24 +30,9 @@ export const HeroBanner = ({
 
   return (
     <div className="relative min-h-[240px] flex items-center justify-center overflow-hidden">
-      {/* Background Video with Overlay */}
+      {/* Background - Video removed temporarily (too large for git) */}
       <div className="absolute inset-0">
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
-          onLoadedData={(e) => {
-            const video = e.target as HTMLVideoElement;
-            video.play().catch(err => console.log('Video autoplay failed:', err));
-          }}
-        >
-          <source src={heroBgVideo} type="video/mp4" />
-          <source src={heroBgVideo} type="video/quicktime" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 via-blue-800/50 to-primary/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 via-blue-800 to-primary" />
       </div>
 
       {/* Content */}
