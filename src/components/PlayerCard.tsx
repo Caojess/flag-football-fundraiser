@@ -26,12 +26,12 @@ export const PlayerCard = ({ player, isSelected, onClick, onDonate }: PlayerCard
       }`}
       onClick={onClick}
     >
-      <div className="relative aspect-square overflow-hidden bg-gray-200">
+      <div className="relative aspect-square overflow-hidden bg-white p-4">
         {player.headshot_url ? (
           <img
             src={player.headshot_url}
             alt={player.name}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
             onError={(e) => {
               // If image fails to load, hide it and show placeholder
               e.currentTarget.style.display = 'none';
@@ -42,7 +42,7 @@ export const PlayerCard = ({ player, isSelected, onClick, onDonate }: PlayerCard
             <User className="w-20 h-20 text-gray-400" strokeWidth={1.5} />
           </div>
         )}
-        {player.number > 0 && (
+        {player.number && player.number !== '?' && (
           <div className="absolute top-2 right-2 bg-primary text-white font-black text-lg w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
             #{player.number}
           </div>

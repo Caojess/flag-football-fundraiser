@@ -33,8 +33,7 @@ export const RecentDonations = () => {
           *,
           players:player_id (name, number)
         `)
-        .order("created_at", { ascending: false })
-        .limit(10);
+        .order("created_at", { ascending: false });
 
       if (error) throw error;
       setDonations(data || []);
@@ -82,7 +81,7 @@ export const RecentDonations = () => {
         Recent Donations
       </h2>
 
-      <div className="space-y-3">
+      <div className="max-h-[600px] overflow-y-auto pr-2 space-y-3">
         {donations.length === 0 ? (
           <Card className="p-8 text-center">
             <p className="text-muted-foreground">No donations yet. Be the first to support!</p>

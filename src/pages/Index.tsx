@@ -10,7 +10,7 @@ import teamLogo from "@/assets/team-logo.png";
 interface Player {
   id: string;
   name: string;
-  number: number;
+  number: string;
   position: string;
   slug: string;
   headshot_url: string;

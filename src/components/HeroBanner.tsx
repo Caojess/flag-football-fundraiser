@@ -96,19 +96,23 @@ export const HeroBanner = ({
               Back to Team
             </Button>
 
+            {/* Adjust Y position: change the translateY value (positive = down, negative = up) */}
             {selectedPlayer.headshot_url ? (
-              <img 
-                src={selectedPlayer.headshot_url} 
-                alt={selectedPlayer.name} 
-                className="w-32 h-32 rounded-full mx-auto mb-3 border-4 border-white shadow-2xl object-cover"
-              />
+              <div className="w-52 h-52 rounded-full mx-auto mb-3 mt-8 border-2 border-white shadow-2xl bg-white flex items-center justify-center overflow-hidden p-3">
+                <img 
+                  src={selectedPlayer.headshot_url} 
+                  alt={selectedPlayer.name} 
+                  className="w-full h-full object-contain"
+                  style={{ transform: 'translateY(15px)' }}
+                />
+              </div>
             ) : (
-              <div className="w-32 h-32 rounded-full mx-auto mb-3 border-4 border-white shadow-2xl bg-gray-200 flex items-center justify-center">
+              <div className="w-52 h-52 rounded-full mx-auto mb-3 mt-8 border-2 border-white shadow-2xl bg-white flex items-center justify-center">
                 <User className="w-16 h-16 text-gray-400" strokeWidth={1.5} />
               </div>
             )}
             
-            {selectedPlayer.number > 0 ? (
+            {selectedPlayer.number && selectedPlayer.number !== '?' ? (
               <div className="inline-block bg-secondary/20 backdrop-blur-sm px-4 py-1 rounded-full mb-2 border border-secondary/30">
                 <span className="text-2xl font-black text-white">#{selectedPlayer.number}</span>
                 <span className="text-white/80 mx-2">|</span>
