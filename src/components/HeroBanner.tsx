@@ -108,17 +108,17 @@ export const HeroBanner = ({
               </div>
             )}
             
-            {/* Jersey number commented out until numbers are available
-            <div className="inline-block bg-secondary/20 backdrop-blur-sm px-4 py-1 rounded-full mb-2 border border-secondary/30">
-              <span className="text-2xl font-black text-white">#{selectedPlayer.number}</span>
-              <span className="text-white/80 mx-2">|</span>
-              <span className="text-lg text-white/90">{selectedPlayer.position}</span>
-            </div>
-            */}
-
-            <div className="inline-block bg-secondary/20 backdrop-blur-sm px-4 py-1 rounded-full mb-2 border border-secondary/30">
-              <span className="text-lg text-white/90">{selectedPlayer.position}</span>
-            </div>
+            {selectedPlayer.number > 0 ? (
+              <div className="inline-block bg-secondary/20 backdrop-blur-sm px-4 py-1 rounded-full mb-2 border border-secondary/30">
+                <span className="text-2xl font-black text-white">#{selectedPlayer.number}</span>
+                <span className="text-white/80 mx-2">|</span>
+                <span className="text-lg text-white/90">{selectedPlayer.position}</span>
+              </div>
+            ) : (
+              <div className="inline-block bg-secondary/20 backdrop-blur-sm px-4 py-1 rounded-full mb-2 border border-secondary/30">
+                <span className="text-lg text-white/90">{selectedPlayer.position}</span>
+              </div>
+            )}
 
             <h1 className="text-3xl md:text-5xl font-black text-white mb-2">
               {selectedPlayer.name}

@@ -32,17 +32,21 @@ export const PlayerCard = ({ player, isSelected, onClick, onDonate }: PlayerCard
             src={player.headshot_url}
             alt={player.name}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            onError={(e) => {
+              // If image fails to load, hide it and show placeholder
+              e.currentTarget.style.display = 'none';
+            }}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <User className="w-20 h-20 text-gray-400" strokeWidth={1.5} />
           </div>
         )}
-        {/* Jersey number - commented out until numbers are available
-        <div className="absolute top-2 right-2 bg-primary text-white font-black text-lg w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
-          #{player.number}
-        </div>
-        */}
+        {player.number > 0 && (
+          <div className="absolute top-2 right-2 bg-primary text-white font-black text-lg w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+            #{player.number}
+          </div>
+        )}
       </div>
       
       <div className="p-4">
